@@ -10,7 +10,7 @@ int main()
     int pos; // pos for position at which arry to be inserted
     cin >> pos;
 
-    for(int i=pos;i<4;i++){
+    for(int i=pos;i<5;i++){
         a[i] = a[i+1];
     }
 
