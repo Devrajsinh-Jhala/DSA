@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// Implementation using arrays 
 class Stack{
     int *arr;
     int max_size;
