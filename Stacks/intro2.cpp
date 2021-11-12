@@ -85,20 +85,40 @@ public:
 
 int main()
 {
-    Stack st = Stack();
+    // Stack st = Stack();
+    // st.push(10);
+    // st.push(20);
+    // st.push(30);
+    // st.push(40);
+    // cout << st.top() << endl;
+    // cout << st.get_size() << endl;
+    // st.print();
+
+    // st.pop();
+    // st.print();
+    // cout << st.top() << endl;
+    // cout << st.get_size() << endl;
+
+    // Stack using STL
+    stack<int> st;
     st.push(10);
     st.push(20);
     st.push(30);
     st.push(40);
     cout << st.top() << endl;
-    cout << st.get_size() << endl;
-    st.print();
-
+    cout << st.empty() << endl;
     st.pop();
-    st.print();
     cout << st.top() << endl;
-    cout << st.get_size() << endl;
-
+    cout << st.empty() << endl;
+    st.pop();
+    cout << st.top() << endl;
+    cout << st.empty() << endl;
+    st.pop();
+    cout << st.top() << endl;
+    cout << st.empty() << endl;
+    st.pop();
+    // cout << st.top() << endl;
+    cout << st.empty() << endl;
 
     return 0;
 }
