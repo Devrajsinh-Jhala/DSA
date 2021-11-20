@@ -24,15 +24,17 @@ struct Node{
 
 */
 
-class LinkedList{
-    struct Node{
-        int data;
-        Node* next;
-        Node(int d){
-            data = d;
-            next = NULL;
+struct Node{
+    int data;
+    Node* next;
+    Node(int d){
+        data = d;
+        next = NULL;
         }
     };
+
+class LinkedList{
+
     Node* head;
     Node* tail;
 
@@ -176,12 +178,107 @@ public:
         head = Reverse_Recursive_Method(NULL,head);
     }
 
+    Node* FindMidpoint(){
+        // Here we use slow and fast pointer approach where slow moves one step and fast moves 2 steps or more
+        Node *slow = head, *fast = head -> next;
+        while(fast != NULL && fast -> next != NULL){
+            slow = slow -> next;
+            fast = fast -> next -> next;
+        }
+        return slow;
+    }
+
+    Node* Find_kth_Element_from_Last(int k){
+        Node* slow = head, *fast = head;
+        while(fast != NULL && --k){
+            fast = fast -> next;
+        }
+        if(fast != NULL){
+            fast = fast -> next;
+            while(fast != NULL){
+                fast = fast -> next;
+                slow = slow -> next;
+            }
+            return slow;
+        }else{
+            cout << "Position does'nt exist" << endl;
+            return NULL;
+        }
+
+    }
+
+    Node* get_head(){
+        return head;
+    }
+
+    Node* get_tail(){
+        return tail;
+    }
+
+
 };
 
+Node *Find_the_Intersection_Point(Node* head1, Node* head2){
+    int l1 = 0,l2 = 0;
+    Node* temp1 = head1, *temp2 = head2;
+    while(temp1 != NULL){
+        l1++;
+        temp1 = temp1 -> next;
+    }
+    while(temp2 != NULL){
+        l2++;
+        temp2 = temp2 -> next;
+    }
+
+    int diff = abs(l1 - l2);
+    if(l1<l2){
+        temp1 = head2;
+        temp2 = head1;
+    }else{
+        temp1 = head1;
+        temp2 = head2;        
+    }
+
+    while(diff--){
+        temp1 = temp1 -> next;
+    }
+    while(temp1 != NULL && temp2 != NULL){
+        if(temp1 == temp2){
+            return temp1;
+        }
+        temp1 = temp1 -> next;
+        temp2 = temp2 -> next;
+    }
+    return NULL;
+
+}
+
+Node* Find_the_Intersection_Point2(Node* head1, Node* head2){
+    Node* temp1 = head1, *temp2 = head2;
+    while(true){
+        temp1 = temp1 -> next;
+        temp2 = temp2 -> next;
+
+        if(temp1 == temp2){
+            return temp1;
+        }
+
+        if(temp1 == NULL){
+            temp1 = head2;
+        }
+        if(temp2 == NULL){
+            temp2 = head1;
+        }
+    }
+
+    return NULL;
+
+}
 
 
 int main()
 {
+    /*
     LinkedList ll = LinkedList();
     ll.InsertAtEnd(10);
     ll.InsertAtEnd(20);
@@ -194,6 +291,36 @@ int main()
     // ll.Reverse_Iterative_Method();
     ll.Reverse_Recursive_Method_ll();
     ll.print();
+    Node *mid = ll.FindMidpoint();
+    cout << "Midpoint is: " << mid -> data << endl;
+    Node *kth = ll.Find_kth_Element_from_Last(5);
+    cout << "Kth Position is: " << kth -> data << endl;
+
+    */
+
+   LinkedList l1 = LinkedList();
+   l1.InsertAtEnd(10);
+   l1.InsertAtEnd(20);
+   l1.InsertAtEnd(30);
+   l1.InsertAtEnd(40);
+   l1.InsertAtEnd(50);
+   l1.InsertAtEnd(60);
+
+    LinkedList l2 = LinkedList();
+    l2.InsertAtEnd(110);
+    l2.InsertAtEnd(120);
+
+    // Making an Intersection Point
+
+    Node* head1 = l1.get_head();
+    Node* tail2 = l2.get_tail();
+
+    tail2 -> next = head1 -> next -> next -> next -> next;
+    l1.print();
+    l2.print();
+
+    Node* Find = Find_the_Intersection_Point2(l1.get_head(), l2.get_head());
+    cout << "Intersection Point is: " << Find -> data << endl;
 
     return 0;
 }
